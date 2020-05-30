@@ -1,5 +1,5 @@
 """
-Find fibonacci numbers in ~O(1) time, can be shortened to one liner but extended for readabilaty
+Find fibonacci numbers in O(1) time
 """
 
 def fib(tofind):
@@ -9,4 +9,4 @@ def fib(tofind):
 	else:
 		return int(((phi ** tofind) / (5 ** 0.5)) + 1)
 
-fib(110)
+print(fib(110))
