@@ -10,7 +10,6 @@ def factorial(n):
     fact = 1
     for i in range(1, n + 1):
         fact = fact * i
-    print(fact)
     return fact
 
 def find_pi(k: int = 0): # we default the value to 0 if one isnt passed for any reason
@@ -26,6 +25,6 @@ def find_pi(k: int = 0): # we default the value to 0 if one isnt passed for any 
     denominator = c*d*e
     res = numerator/denominator
     new_numerator = 426880*math.sqrt(10005)
-    print(new_numerator / res)
+    return new_numerator / res
 
 find_pi()
