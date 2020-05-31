@@ -6,25 +6,23 @@ which for computational purposes can be simplified to
 an in depth description can be found at : https://en.wikipedia.org/wiki/Chudnovsky_algorithm
 """
 import math
-def factorial(n):
-    fact = 1
-    for i in range(1, n + 1):
-        fact = fact * i
-    return fact
+from decimal import Decimal as decimal, getcontext as gc
 
-def find_pi(k: int = 0): # we default the value to 0 if one isnt passed for any reason
-    # (6k)!(545140134k + 13591409)/(3k)!(k!)^3(-26253741264078000)^k
-    a = factorial(6*k)
-    b = (545140134 * k) + 13591409
-    c = factorial(3*k)
-    d = factorial(k) ** 3
-    e = (-26253741264078000) ** k
-    numerator = a *b
-    print(numerator)
-    print(e)
-    denominator = c*d*e
-    res = numerator/denominator
-    new_numerator = 426880*math.sqrt(10005)
-    return new_numerator / res
+def chudnovksy(max_k : int, precision : int):
+    gc().prec = precision
+    k = 6
+    m = 1
+    l = 13591409
+    res = 13591409
+    x = 1
+    l_add = 545140134
+    x_mult = -2625327412640768000
+    while k < max_k:
+        m = k ** 3 - 16 * k // k ** 3 # mk+1 is defined as K^3 - 16K div k^3 where m0 = 1
+        l += l_add # l(subscript)k is defined as l(sub)k + 545140134 where l0 = 13591409
+        x *= x_mult # x(sub)k is defined as x(sub)k * -2625327412640768000 where x0 = 1
+        res += decimal(m*l) / x
+        k += 12
+    pi = 426880 * decimal(10005).sqrt() / res
+    return pi
 
-find_pi()
